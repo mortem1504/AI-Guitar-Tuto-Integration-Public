@@ -1,0 +1,9 @@
+# Audio lab only. Saved as UTF-8 (it used to be UTF-16, which pip cannot read).
+# torch / torchvision / ultralytics were removed: the YOLO fretboard detector
+# was dropped in favour of the web app's four-click calibration.
+librosa==0.11.0
+numpy==2.4.6
+scipy==1.17.1
+sounddevice==0.5.6
+soundfile==0.14.0
+pytest==8.4.2

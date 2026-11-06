@@ -1,0 +1,36 @@
+{
+  "name": "ai-guitar-coach",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "copy-wasm": "node scripts/copy-wasm.mjs",
+    "predev": "npm run copy-wasm",
+    "prebuild": "npm run copy-wasm",
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "neck-check": "esbuild scripts/neck-check.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/neck-check.mjs --log-level=error && node node_modules/.cache/neck-check.mjs",
+    "fret-check": "esbuild scripts/fret-check.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/fret-check.mjs --log-level=error && node node_modules/.cache/fret-check.mjs",
+    "track-check": "esbuild scripts/track-check.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/track-check.mjs --log-level=error && node node_modules/.cache/track-check.mjs",
+    "note-check": "esbuild scripts/note-check.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/note-check.mjs --log-level=error && node node_modules/.cache/note-check.mjs",
+    "audio-check": "esbuild scripts/audio-check.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/audio-check.mjs --log-level=error && node node_modules/.cache/audio-check.mjs",
+    "lesson-check": "esbuild scripts/lesson-check.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/lesson-check.mjs --log-level=error && node node_modules/.cache/lesson-check.mjs",
+    "fusion-check": "esbuild scripts/fusion-check.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/fusion-check.mjs --log-level=error && node node_modules/.cache/fusion-check.mjs",
+    "home-check": "esbuild scripts/home-check.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/home-check.mjs --log-level=error && node node_modules/.cache/home-check.mjs",
+    "tab-check": "esbuild scripts/tab-check.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/tab-check.mjs --log-level=error && node node_modules/.cache/tab-check.mjs",
+    "breakdown-check": "esbuild scripts/breakdown-check.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/breakdown-check.mjs --log-level=error && node node_modules/.cache/breakdown-check.mjs",
+    "song-check": "esbuild scripts/song-check.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/song-check.mjs --log-level=error && node node_modules/.cache/song-check.mjs",
+    "guidance-check": "esbuild scripts/guidance-check.mjs --bundle --platform=node --format=esm --outfile=node_modules/.cache/guidance-check.mjs --log-level=error && node node_modules/.cache/guidance-check.mjs"
+  },
+  "dependencies": {
+    "@coderline/alphatab": "1.8.4",
+    "@mediapipe/tasks-vision": "^0.10.22"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12"
+  },
+  "description": "AI Guitar Coach, based on Guitar-Learning by DecoudJuan (MIT). A guitar class that watches: the camera finds your fretboard and your hand and tells you which finger goes where."
+}

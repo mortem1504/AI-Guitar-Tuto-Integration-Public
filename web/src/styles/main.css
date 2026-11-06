@@ -1,0 +1,1405 @@
+/*
+ * One dark stage with the camera behind it. Everything the class says sits in
+ * quiet panels around the edges, because the middle of the screen belongs to
+ * the guitar and to the hand on it.
+ */
+
+:root {
+  --ink: #f4f1ea;
+  --dim: rgba(244, 241, 234, 0.58);
+  --faint: rgba(244, 241, 234, 0.34);
+  --line: rgba(244, 241, 234, 0.14);
+  --panel: rgba(13, 12, 17, 0.82);
+  --raise: rgba(255, 255, 255, 0.06);
+  --accent: hsl(38 92% 62%);
+  --right: hsl(146 62% 55%);
+  --wrong: hsl(6 78% 62%);
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: #08070b;
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#stage {
+  position: fixed;
+  inset: 0;
+}
+
+#video,
+#canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#video {
+  object-fit: cover;
+  /* Dimmed so the overlay reads on top of any room, but far less than a
+     performance app would: the student has to see their own fingers. */
+  filter: brightness(0.72) contrast(1.04);
+}
+
+#canvas {
+  pointer-events: none;
+}
+
+/* While marking the neck the canvas is the input surface. */
+#stage.calibrating #canvas {
+  pointer-events: auto;
+  cursor: crosshair;
+}
+
+.gone {
+  display: none !important;
+}
+
+/* --- Header --- */
+
+#brand {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  left: 20px;
+  pointer-events: none;
+}
+
+#brand h1 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+#status {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Tool buttons --- */
+
+#tools {
+  position: absolute;
+  top: max(14px, env(safe-area-inset-top));
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+#tools button {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--dim);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+#tools button:hover {
+  color: var(--ink);
+  border-color: var(--faint);
+}
+
+#tools button[aria-pressed="true"] {
+  color: #0b0a0f;
+  background: var(--accent);
+  border-color: transparent;
+}
+
+/* --- Cards and modal layers --- */
+
+#start,
+#help,
+#lessons,
+#song,
+#tuner,
+#listen,
+#notes,
+#setup {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(6, 5, 9, 0.72);
+  backdrop-filter: blur(6px);
+  overflow-y: auto;
+}
+
+/* Marking the neck is not a modal: the clicks have to reach the camera behind
+   it, so this layer lets everything through and only the card itself catches
+   the mouse. The card parks in a corner — narrow, and out of the middle, where
+   the neck is — and the student moves it when it still sits on the corner they
+   have to click. */
+#calibrate {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  padding: 18px;
+  pointer-events: none;
+}
+
+#calibrate.at-bl {
+  place-items: end start;
+}
+
+#calibrate.at-br {
+  place-items: end end;
+}
+
+#calibrate.at-tl {
+  place-items: start start;
+}
+
+#calibrate.at-tr {
+  place-items: start end;
+}
+
+/* The tool buttons live along the top edge. */
+#calibrate.at-tl,
+#calibrate.at-tr {
+  padding-top: 64px;
+}
+
+#calibrate .card {
+  pointer-events: auto;
+  width: min(400px, 100%);
+  padding: 20px 22px;
+  gap: 11px;
+}
+
+#calibrate .step {
+  color: var(--ink) !important;
+  font-size: 15px !important;
+}
+
+.card {
+  width: min(560px, 100%);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 26px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.card h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.card p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--dim);
+}
+
+.card p b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.start-title {
+  font-size: 26px !important;
+  letter-spacing: -0.01em;
+}
+
+.start-lead {
+  font-size: 15px !important;
+  color: var(--ink) !important;
+}
+
+.start-note,
+.card .quiet {
+  font-size: 12.5px !important;
+  color: var(--faint) !important;
+}
+
+.start-warn {
+  font-size: 13px !important;
+  color: var(--accent) !important;
+}
+
+.start-error {
+  font-size: 13px !important;
+  color: var(--wrong) !important;
+}
+
+button.primary {
+  align-self: flex-start;
+  border: none;
+  border-radius: 999px;
+  padding: 11px 24px;
+  font: inherit;
+  font-weight: 600;
+  background: var(--accent);
+  color: #100c04;
+  cursor: pointer;
+}
+
+button.primary:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+button.ghost {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font: inherit;
+  font-size: 13px;
+  background: transparent;
+  color: var(--dim);
+  cursor: pointer;
+}
+
+button.ghost:hover {
+  color: var(--ink);
+  border-color: var(--faint);
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* The fret stepper: a label and two small square buttons. */
+.row.stepper {
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.row.stepper button {
+  min-width: 34px;
+  padding: 6px 0;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* --- Settings panel --- */
+
+#panel {
+  position: absolute;
+  top: 62px;
+  right: 16px;
+  width: min(320px, calc(100vw - 32px));
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px 18px 20px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section > h3 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.choices {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.choices button {
+  flex: 1 1 auto;
+  border: 1px solid var(--line);
+  background: var(--raise);
+  color: var(--dim);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.choices button[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: transparent;
+  color: #100c04;
+  font-weight: 600;
+}
+
+.slider {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 10px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--dim);
+}
+
+.slider input {
+  grid-column: 1 / -1;
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.slider .value {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--dim);
+  cursor: pointer;
+}
+
+.check input {
+  accent-color: var(--accent);
+  width: 15px;
+  height: 15px;
+}
+
+/* --- The coach strip: what to play, and how it is going --- */
+
+#coach {
+  position: absolute;
+  left: 50%;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: min(840px, calc(100vw - 28px));
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 18px 22px;
+  backdrop-filter: blur(10px);
+}
+
+#coach .diagram {
+  flex: 0 0 auto;
+}
+
+#coach .words {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.coach-name {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.coach-line {
+  font-size: 17px;
+  color: var(--dim);
+  line-height: 1.4;
+}
+
+.coach-line.right {
+  color: var(--right);
+}
+
+.coach-line.wrong {
+  color: var(--wrong);
+}
+
+.coach-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 12.5px;
+  color: var(--faint);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* The hold-to-pass bar: the only moving thing on the strip. */
+.hold {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--raise);
+  overflow: hidden;
+}
+
+.hold > span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--right);
+  transition: width 90ms linear;
+}
+
+/* --- Lesson list --- */
+
+.lesson-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: min(52vh, 420px);
+  overflow-y: auto;
+}
+
+.lesson {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--line);
+  background: var(--raise);
+  color: var(--ink);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.lesson:hover:not(:disabled) {
+  border-color: var(--faint);
+}
+
+.lesson:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.lesson .title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lesson .sub {
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.lesson .grow {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.lesson .score {
+  font-size: 12px;
+  color: var(--right);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Song chart --- */
+
+#song-card textarea {
+  width: 100%;
+  min-height: 170px;
+  resize: vertical;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--ink);
+  padding: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+#song-card textarea:focus {
+  outline: 1px solid var(--accent);
+}
+
+/* --- The tuner --- */
+
+.tuner-dial {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  padding: 14px 0 6px;
+}
+
+.tuner-note {
+  font-size: 46px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.tuner-note.right {
+  color: var(--right);
+}
+
+.tuner-note.wrong {
+  color: var(--accent);
+}
+
+/* The needle track. Centre is in tune; the pip slides either side of it. */
+.tuner-scale {
+  position: relative;
+  width: min(340px, 100%);
+  height: 26px;
+  border-radius: 999px;
+  background: var(--raise);
+  border: 1px solid var(--line);
+}
+
+.tuner-scale .mark {
+  position: absolute;
+  left: 50%;
+  top: 3px;
+  bottom: 3px;
+  width: 2px;
+  margin-left: -1px;
+  border-radius: 2px;
+  background: var(--right);
+  opacity: 0.6;
+}
+
+.tuner-scale .pip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: var(--ink);
+  transition:
+    left 70ms linear,
+    background 140ms ease;
+}
+
+.tuner-strings {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tuner-string {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--raise);
+}
+
+.tuner-string .name {
+  font-size: 15px;
+  font-weight: 600;
+  min-width: 34px;
+}
+
+.tuner-string .which {
+  flex: 1 1 auto;
+  font-size: 12.5px;
+  color: var(--faint);
+}
+
+.tuner-string .tick {
+  color: transparent;
+  font-size: 14px;
+}
+
+.tuner-string.done {
+  border-color: var(--right);
+}
+
+.tuner-string.done .tick {
+  color: var(--right);
+}
+
+/* --- Small screens --- */
+
+@media (max-width: 620px) {
+  #coach {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  #panel {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-height: 70vh;
+    border-radius: 16px 16px 0 0;
+  }
+}
+
+/* --- Listening --- */
+
+.listen-level,
+.listen-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--dim);
+}
+
+/* The level, with the room's noise floor as a tick: a note has to reach well
+   past the tick to be heard. */
+.listen-meter {
+  position: relative;
+  flex: 1;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--raise);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.listen-meter .fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: var(--right);
+  transition: width 50ms linear;
+}
+
+.listen-meter .floor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+}
+
+.listen-input select {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  color: var(--ink);
+  background: var(--raise);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+.listen-debug {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--dim);
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  white-space: pre-wrap;
+}
+
+/* --- Single notes --- */
+
+.card.wide {
+  width: min(760px, 100%);
+}
+
+.card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dim);
+}
+
+.notes-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--dim);
+}
+
+/* A choice of two, as buttons: pressed is the one in force. */
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.segmented button {
+  border: none;
+  background: transparent;
+  color: var(--dim);
+  font: inherit;
+  font-size: 13px;
+  padding: 7px 14px;
+  cursor: pointer;
+}
+
+.segmented button[aria-pressed="true"] {
+  background: var(--accent);
+  color: #100c04;
+  font-weight: 600;
+}
+
+.notes-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* "Play this": sized to be read from a metre away, guitar in hand. */
+.notes-now {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 0 2px;
+}
+
+.notes-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+}
+
+.notes-target {
+  font-size: 64px;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.notes-where {
+  font-size: 18px;
+  color: var(--dim);
+}
+
+.notes-count {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  font-size: 88px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--panel);
+  border-radius: 12px;
+}
+
+.notes-count.on {
+  display: grid;
+}
+
+.tab {
+  display: grid;
+  gap: 0;
+  font: 600 17px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  padding: 8px 6px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.tab .letter {
+  color: var(--faint);
+  font-size: 13px;
+  align-self: center;
+}
+
+/* The string is a one-pixel line through every cell; a fret number sits on it in a disc. */
+.tab .cell {
+  height: 24px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: linear-gradient(var(--faint), var(--faint)) center / 100% 1px no-repeat;
+}
+
+.tab .cell:not(:empty) {
+  background:
+    radial-gradient(circle, #19171f 0 11px, transparent 12px),
+    linear-gradient(var(--faint), var(--faint)) center / 100% 1px no-repeat;
+}
+
+.tab .cell.past {
+  color: var(--faint);
+}
+
+.tab .cell.now:not(:empty) {
+  color: #100c04;
+  background:
+    radial-gradient(circle, var(--accent) 0 12px, transparent 13px),
+    linear-gradient(var(--faint), var(--faint)) center / 100% 1px no-repeat;
+}
+
+.tab .mark {
+  height: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.notes-feedback {
+  min-height: 86px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 2px solid var(--line);
+  background: var(--raise);
+}
+
+.notes-feedback .word {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 28px;
+  font-weight: 650;
+}
+
+.notes-feedback .line {
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+/* Colour is the third signal, after the icon and the word. */
+.state-clean {
+  color: var(--right);
+  border-color: var(--right) !important;
+}
+
+.state-wrongNote,
+.state-wrongSpot {
+  color: var(--wrong);
+  border-color: var(--wrong) !important;
+}
+
+.state-timing {
+  color: var(--accent);
+  border-color: var(--accent) !important;
+}
+
+.state-notCaught,
+.state-weakSignal {
+  color: var(--dim);
+}
+
+.notes-feedback.state-clean .word,
+.notes-feedback.state-wrongNote .word,
+.notes-feedback.state-wrongSpot .word,
+.notes-feedback.state-timing .word {
+  color: inherit;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  gap: 8px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--raise);
+  border: 1px solid var(--line);
+}
+
+.stat b {
+  font-size: 24px;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat span {
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 32vh;
+  overflow-y: auto;
+  font-size: 13px;
+}
+
+.timeline li {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  color: var(--ink);
+  border: none !important;
+}
+
+.timeline .at {
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+  min-width: 3em;
+}
+
+.timeline .icon {
+  width: 1.2em;
+  text-align: center;
+}
+
+.timeline li.state-wrongNote .icon,
+.timeline li.state-wrongSpot .icon {
+  color: var(--wrong);
+}
+
+.timeline li.state-timing .icon {
+  color: var(--accent);
+}
+
+/* Playing with the camera on: the neck has to stay in sight, so the layer
+   lets the picture through and the card docks at the bottom, compact. The
+   feedback keeps its size: it is still read from a metre away. Choosing and
+   the review stay modal. */
+#notes.with-camera[data-view="play"] {
+  background: transparent;
+  backdrop-filter: none;
+  pointer-events: none;
+  place-items: end center;
+  padding: 12px;
+}
+
+#notes.with-camera[data-view="play"] .card {
+  pointer-events: auto;
+  width: min(620px, 100%);
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(14, 12, 18, 0.86);
+}
+
+#notes.with-camera[data-view="play"] .notes-feedback {
+  min-height: 64px;
+  padding: 10px 14px;
+}
+
+/* Where the camera says the note was played, or why it can't say right now. */
+.notes-vision {
+  font-size: 13px;
+  color: var(--faint);
+}
+
+.notes-vision:empty {
+  display: none;
+}
+
+.notes-vision.fallback {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--dim);
+}
+
+/* --- Phase 5: dashboard, survey, setup, live screen --- */
+
+/* The home card scrolls with its layer when the dashboard is long. */
+#start {
+  place-items: start center;
+}
+
+#start .card {
+  margin: auto 0;
+}
+
+.tag {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.lesson.continue {
+  border-color: var(--accent);
+}
+
+/* Accuracy bars: oldest left. The trend is also said in words below them. */
+.trend {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 56px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.trend span {
+  flex: 1;
+  max-width: 28px;
+  border-radius: 4px 4px 0 0;
+  background: var(--right);
+  opacity: 0.8;
+}
+
+.recent {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.recent li {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.recent .at {
+  min-width: 4.5em;
+  color: var(--faint);
+}
+
+.recent .grow {
+  flex: 1;
+  color: var(--dim);
+}
+
+button.link {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: var(--accent);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.survey {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.survey .notes-option,
+.setup-step .notes-option {
+  flex-wrap: wrap;
+}
+
+.segmented {
+  flex-wrap: wrap;
+}
+
+/* The setup check: five steps in a grid, each with a verdict that has a word
+   as well as a colour. */
+.setup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.setup-step {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--raise);
+}
+
+.setup-step h3 {
+  color: var(--ink);
+}
+
+.card .setup-verdict.verdict-ok {
+  color: var(--right);
+}
+
+.card .setup-verdict.verdict-bad {
+  color: var(--wrong);
+}
+
+.card .setup-verdict.verdict-wait {
+  color: var(--dim);
+}
+
+/* The live screen's signal line, beside the meter. */
+.signal {
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.signal-good {
+  color: var(--right);
+}
+
+.signal-quiet {
+  color: var(--accent);
+}
+
+.signal-clipping {
+  color: var(--wrong);
+}
+
+/* Freestyle: the notes before the newest one. */
+.free-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 28px;
+}
+
+.chip {
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--dim);
+}
+
+/* In a column the meter's flex: 1 would make it tall; here it is a bar. */
+.setup-step .listen-meter {
+  flex: none;
+}
+
+/* --- My songs: import, preview, overview, lesson --- */
+
+.song-drop {
+  display: grid;
+  gap: 10px;
+  border: 1px dashed transparent;
+  border-radius: 14px;
+}
+
+.song-drop.over {
+  border-color: var(--accent);
+}
+
+.song-drop textarea {
+  width: 100%;
+  min-height: 170px;
+  resize: vertical;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--ink);
+  padding: 12px;
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.song-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+}
+
+.song-field {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--dim);
+}
+
+.song-field input,
+.song-field select,
+.song-fields > input {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  padding: 6px 8px;
+  font: inherit;
+  font-size: 14px;
+}
+
+/* The preview's tab: every row of the song, a little smaller than the lesson's. */
+.song-tab {
+  display: grid;
+  gap: 8px;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.song-tab .tab {
+  font-size: 14px;
+}
+
+.tab .cell.listen-only {
+  opacity: 0.55;
+}
+
+.song-warnings {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--dim);
+}
+
+.song-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.song-section {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--raise);
+}
+
+.song-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+/* Mastery is said in words; the colour only repeats it. */
+.tag.mastery-new { color: var(--faint); }
+.tag.mastery-learning { color: var(--dim); }
+.tag.mastery-clean { color: var(--accent); }
+.tag.mastery-mastered { color: var(--right); }
+
+.song-result {
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.song-hand {
+  display: grid;
+  gap: 2px;
+  font-size: 14px;
+  color: var(--dim);
+}
+
+.song-finger { color: var(--ink); }
+
+.song-controls {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.song-loop {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--dim);
+}
+
+.song-tempo input[type="range"] {
+  width: 140px;
+  accent-color: var(--accent);
+}
+
+button.danger {
+  border-color: var(--wrong);
+  color: var(--wrong);
+}
+
+/* --- The fretboard diagram (FretDiagram.ts): every state has a shape or a word, colour only repeats it --- */
+
+.fret-diagram {
+  width: 100%;
+  height: auto;
+  display: block;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.fret-diagram text { text-anchor: middle; fill: var(--dim); font-size: 12px; }
+.fret-diagram .board { fill: rgba(0, 0, 0, 0.3); }
+.fret-diagram .wire { stroke: var(--faint); stroke-width: 1.5; }
+.fret-diagram .nut { stroke: var(--ink); stroke-width: 5; }
+.fret-diagram .string { stroke: var(--dim); }
+.fret-diagram .inlay { fill: var(--line); }
+.fret-diagram .fret-number { fill: var(--faint); font-size: 11px; }
+.fret-diagram .fret-number.marked { fill: var(--dim); font-weight: 600; }
+.fret-diagram .letter { fill: var(--faint); font-size: 12px; }
+.fret-diagram .hand-window { fill: color-mix(in srgb, var(--accent) 12%, transparent); stroke: color-mix(in srgb, var(--accent) 45%, transparent); stroke-dasharray: 4 3; }
+.fret-diagram .hand-label { text-anchor: start; fill: var(--accent); font-size: 11px; }
+
+.fret-diagram .target.now circle { fill: var(--accent); stroke: #100c04; stroke-width: 1.5; }
+.fret-diagram .target.now text { fill: #100c04; font-size: 15px; font-weight: 700; }
+.fret-diagram .target.next circle { fill: none; stroke: var(--accent); stroke-width: 2; opacity: 0.75; }
+.fret-diagram .target.later circle { fill: none; stroke: var(--dim); stroke-width: 1.5; stroke-dasharray: 3 2; opacity: 0.6; }
+.fret-diagram .target.next text,
+.fret-diagram .target.later text { fill: var(--dim); font-size: 11px; }
+/* An open string: a ring with 0, never filled, whatever its role. */
+.fret-diagram .target.open circle { fill: none; stroke: var(--ink); stroke-width: 2; }
+.fret-diagram .target.open text { fill: var(--ink); font-size: 11px; font-weight: 600; }
+.fret-diagram .target.now.open circle { stroke: var(--accent); stroke-width: 3; }
+
+.fret-diagram .arrow .line { fill: none; stroke: var(--ink); stroke-width: 2; }
+.fret-diagram .arrow .head { fill: var(--ink); }
+.fret-diagram .arrow.shift .line { stroke: var(--accent); stroke-dasharray: 5 3; }
+.fret-diagram .arrow.shift .head { fill: var(--accent); }
+.fret-diagram .shift-label { fill: var(--accent); font-size: 12px; font-weight: 600; }
+.fret-diagram .technique-label { fill: var(--ink); font-size: 12px; font-weight: 700; }
+.fret-diagram .technique.wave { fill: none; stroke: var(--ink); stroke-width: 2; }
+
+.fret-diagram .flash { fill: none; stroke-width: 4; animation: fret-flash 0.7s ease-out; }
+.fret-diagram .flash.good { stroke: var(--right); }
+.fret-diagram .flash.bad { stroke: var(--wrong); }
+.fret-diagram .flash-icon { font-size: 16px; font-weight: 700; }
+.fret-diagram .flash-icon.good { fill: var(--right); }
+.fret-diagram .flash-icon.bad { fill: var(--wrong); }
+.fret-diagram .played { fill: var(--faint); stroke: var(--ink); stroke-dasharray: 2 2; }
+.fret-diagram .played-label { fill: var(--dim); font-size: 10px; }
+
+@keyframes fret-flash {
+  from { stroke-width: 9; opacity: 1; }
+  to { stroke-width: 4; opacity: 0.9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fret-diagram .flash { animation: none; }
+}
+
+.fret-guide { display: grid; gap: 4px; }
+.fret-guide-text { font-size: 14px; color: var(--ink); }
+.fret-legend { font-size: 12px; color: var(--faint); }
+.guide-paused { justify-self: start; }

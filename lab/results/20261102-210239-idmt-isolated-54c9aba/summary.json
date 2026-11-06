@@ -1,0 +1,595 @@
+{
+  "run_id": "20261102-210239-idmt-isolated-54c9aba",
+  "created": "2026-11-02T21:02:39",
+  "dataset": "data/external/idmt-isolated",
+  "clips": 312,
+  "mic_types": {
+    "idmt-dataset1-fender-strat-clean-neck-sc": 78,
+    "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 78,
+    "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 78,
+    "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 78
+  },
+  "synthetic": false,
+  "params": {
+    "frameSize": 1024,
+    "hopSize": 128,
+    "fluxMaxHz": 6000,
+    "fluxLag": 2,
+    "fluxMaxFilter": 1,
+    "fluxHistory": 16,
+    "fluxRatio": 3,
+    "fluxMin": 22,
+    "refractoryMs": 60,
+    "minRms": 0.002,
+    "gateAboveFloor": 3,
+    "floorRiseDbPerSecond": 3,
+    "pitchDelayMs": 20,
+    "window": 2048,
+    "longWindow": 4096,
+    "extendBelowHz": 120,
+    "minHz": 75,
+    "maxHz": 1400,
+    "method": "mpm",
+    "mpmPeakRatio": 0.9,
+    "mpmMinClarity": 0.8,
+    "yinThreshold": 0.15,
+    "octaveCheck": false,
+    "octaveCheckRatio": 0.1,
+    "priorMaxConfidence": 0.97,
+    "levelIntervalMs": 50
+  },
+  "lab_run": null,
+  "variants": {
+    "web": {
+      "overrides": {},
+      "exportable": true,
+      "total": 312,
+      "accuracy": 0.9711538461538461,
+      "counts": {
+        "correct": 303,
+        "octave": 0,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 9,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 66.43990929705218,
+      "latency_p95_ms": 112.8798185941043,
+      "octave_fixes": 0,
+      "extra_events": 11,
+      "by_mic": {
+        "idmt-dataset1-fender-strat-clean-neck-sc": 0.9615384615384616,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 0.9743589743589743,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 0.9871794871794872,
+        "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 0.9615384615384616
+      },
+      "by_string": {
+        "1": 1.0,
+        "2": 0.9807692307692307,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 0.9423076923076923,
+        "6": 0.9038461538461539
+      },
+      "prior": {
+        "accuracy": 0.9711538461538461,
+        "fired": 0,
+        "false_accept_rate": 0.32673267326732675
+      }
+    },
+    "yin": {
+      "overrides": {
+        "method": "yin"
+      },
+      "exportable": true,
+      "total": 312,
+      "accuracy": 0.8814102564102564,
+      "counts": {
+        "correct": 275,
+        "octave": 0,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 37,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 66.43990929705218,
+      "latency_p95_ms": 112.8798185941043,
+      "octave_fixes": 0,
+      "extra_events": 11,
+      "by_mic": {
+        "idmt-dataset1-fender-strat-clean-neck-sc": 0.8717948717948718,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 0.9487179487179487,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 0.9743589743589743,
+        "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 0.7307692307692307
+      },
+      "by_string": {
+        "1": 0.9807692307692307,
+        "2": 0.9423076923076923,
+        "3": 0.9230769230769231,
+        "4": 0.9038461538461539,
+        "5": 0.8269230769230769,
+        "6": 0.7115384615384616
+      },
+      "prior": {
+        "accuracy": 0.8814102564102564,
+        "fired": 0,
+        "false_accept_rate": 0.2727272727272727
+      }
+    },
+    "octave": {
+      "overrides": {
+        "octaveCheck": true
+      },
+      "exportable": true,
+      "total": 312,
+      "accuracy": 0.9198717948717948,
+      "counts": {
+        "correct": 287,
+        "octave": 0,
+        "harmonic": 5,
+        "fifth": 11,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 9,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 66.43990929705218,
+      "latency_p95_ms": 112.87981859410431,
+      "octave_fixes": 16,
+      "extra_events": 11,
+      "by_mic": {
+        "idmt-dataset1-fender-strat-clean-neck-sc": 0.9230769230769231,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 0.9615384615384616,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 0.9871794871794872,
+        "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 0.8076923076923077
+      },
+      "by_string": {
+        "1": 0.9807692307692307,
+        "2": 0.9615384615384616,
+        "3": 0.8846153846153846,
+        "4": 0.9230769230769231,
+        "5": 0.8653846153846154,
+        "6": 0.9038461538461539
+      },
+      "prior": {
+        "accuracy": 0.9358974358974359,
+        "fired": 5,
+        "false_accept_rate": 0.27177700348432055
+      }
+    },
+    "yin+octave": {
+      "overrides": {
+        "method": "yin",
+        "octaveCheck": true
+      },
+      "exportable": true,
+      "total": 312,
+      "accuracy": 0.8461538461538461,
+      "counts": {
+        "correct": 264,
+        "octave": 0,
+        "harmonic": 2,
+        "fifth": 9,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 37,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 66.43990929705218,
+      "latency_p95_ms": 112.8798185941043,
+      "octave_fixes": 11,
+      "extra_events": 11,
+      "by_mic": {
+        "idmt-dataset1-fender-strat-clean-neck-sc": 0.8589743589743589,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 0.9487179487179487,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 0.9743589743589743,
+        "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 0.6025641025641025
+      },
+      "by_string": {
+        "1": 0.9807692307692307,
+        "2": 0.9423076923076923,
+        "3": 0.8653846153846154,
+        "4": 0.8269230769230769,
+        "5": 0.75,
+        "6": 0.7115384615384616
+      },
+      "prior": {
+        "accuracy": 0.8525641025641025,
+        "fired": 2,
+        "false_accept_rate": 0.22727272727272727
+      }
+    },
+    "delay30": {
+      "overrides": {
+        "pitchDelayMs": 30
+      },
+      "exportable": true,
+      "total": 312,
+      "accuracy": 0.9967948717948718,
+      "counts": {
+        "correct": 311,
+        "octave": 0,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 1,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 76.43990929705217,
+      "latency_p95_ms": 122.8798185941043,
+      "octave_fixes": 0,
+      "extra_events": 11,
+      "by_mic": {
+        "idmt-dataset1-fender-strat-clean-neck-sc": 0.9871794871794872,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 1.0,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 1.0,
+        "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 1.0
+      },
+      "by_string": {
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 1.0,
+        "6": 0.9807692307692307
+      },
+      "prior": {
+        "accuracy": 0.9967948717948718,
+        "fired": 0,
+        "false_accept_rate": 0.15755627009646303
+      }
+    },
+    "delay30+octave": {
+      "overrides": {
+        "pitchDelayMs": 30,
+        "octaveCheck": true
+      },
+      "exportable": true,
+      "total": 312,
+      "accuracy": 0.9871794871794872,
+      "counts": {
+        "correct": 308,
+        "octave": 0,
+        "harmonic": 2,
+        "fifth": 1,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 1,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 76.43990929705217,
+      "latency_p95_ms": 122.8798185941043,
+      "octave_fixes": 3,
+      "extra_events": 11,
+      "by_mic": {
+        "idmt-dataset1-fender-strat-clean-neck-sc": 0.9743589743589743,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 1.0,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 1.0,
+        "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 0.9743589743589743
+      },
+      "by_string": {
+        "1": 0.9807692307692307,
+        "2": 1.0,
+        "3": 0.9807692307692307,
+        "4": 1.0,
+        "5": 0.9807692307692307,
+        "6": 0.9807692307692307
+      },
+      "prior": {
+        "accuracy": 0.9935897435897436,
+        "fired": 2,
+        "false_accept_rate": 0.1461038961038961
+      }
+    },
+    "median30-150": {
+      "overrides": {
+        "lab_median_from_ms": 30,
+        "lab_median_to_ms": 150
+      },
+      "exportable": false,
+      "total": 312,
+      "accuracy": 1.0,
+      "counts": {
+        "correct": 312,
+        "octave": 0,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 0,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 150.00000000000003,
+      "latency_p95_ms": 150.00000000000003,
+      "octave_fixes": 0,
+      "extra_events": 10,
+      "by_mic": {
+        "idmt-dataset1-fender-strat-clean-neck-sc": 1.0,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 1.0,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 1.0,
+        "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 1.0
+      },
+      "by_string": {
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 1.0,
+        "6": 1.0
+      },
+      "prior": {
+        "accuracy": 1.0,
+        "fired": 0,
+        "false_accept_rate": 0.0
+      }
+    },
+    "median30-150+octave": {
+      "overrides": {
+        "lab_median_from_ms": 30,
+        "lab_median_to_ms": 150,
+        "octaveCheck": true
+      },
+      "exportable": false,
+      "total": 312,
+      "accuracy": 0.9967948717948718,
+      "counts": {
+        "correct": 311,
+        "octave": 0,
+        "harmonic": 0,
+        "fifth": 1,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 0,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 150.00000000000003,
+      "latency_p95_ms": 150.00000000000003,
+      "octave_fixes": 0,
+      "extra_events": 10,
+      "by_mic": {
+        "idmt-dataset1-fender-strat-clean-neck-sc": 0.9871794871794872,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 1.0,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 1.0,
+        "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 1.0
+      },
+      "by_string": {
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 1.0,
+        "6": 0.9807692307692307
+      },
+      "prior": {
+        "accuracy": 0.9967948717948718,
+        "fired": 0,
+        "false_accept_rate": 0.0
+      }
+    },
+    "range75-1000": {
+      "overrides": {
+        "maxHz": 1000
+      },
+      "exportable": true,
+      "total": 312,
+      "accuracy": 0.9711538461538461,
+      "counts": {
+        "correct": 303,
+        "octave": 0,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 9,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 66.43990929705218,
+      "latency_p95_ms": 112.8798185941043,
+      "octave_fixes": 0,
+      "extra_events": 11,
+      "by_mic": {
+        "idmt-dataset1-fender-strat-clean-neck-sc": 0.9615384615384616,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 0.9743589743589743,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 0.9871794871794872,
+        "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 0.9615384615384616
+      },
+      "by_string": {
+        "1": 1.0,
+        "2": 0.9807692307692307,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 0.9423076923076923,
+        "6": 0.9038461538461539
+      },
+      "prior": {
+        "accuracy": 0.9711538461538461,
+        "fired": 0,
+        "false_accept_rate": 0.32673267326732675
+      }
+    },
+    "flux18": {
+      "overrides": {
+        "fluxMin": 18
+      },
+      "exportable": true,
+      "total": 312,
+      "accuracy": 0.9615384615384616,
+      "counts": {
+        "correct": 300,
+        "octave": 0,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 12,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 66.43990929705218,
+      "latency_p95_ms": 112.8798185941043,
+      "octave_fixes": 0,
+      "extra_events": 17,
+      "by_mic": {
+        "idmt-dataset1-fender-strat-clean-neck-sc": 0.9358974358974359,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 0.9743589743589743,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 0.9743589743589743,
+        "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 0.9615384615384616
+      },
+      "by_string": {
+        "1": 1.0,
+        "2": 0.9615384615384616,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 0.9423076923076923,
+        "6": 0.8653846153846154
+      },
+      "prior": {
+        "accuracy": 0.9615384615384616,
+        "fired": 0,
+        "false_accept_rate": 0.4066666666666667
+      }
+    },
+    "flux26": {
+      "overrides": {
+        "fluxMin": 26
+      },
+      "exportable": true,
+      "total": 312,
+      "accuracy": 0.9807692307692307,
+      "counts": {
+        "correct": 306,
+        "octave": 0,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 6,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 66.43990929705218,
+      "latency_p95_ms": 112.8798185941043,
+      "octave_fixes": 0,
+      "extra_events": 7,
+      "by_mic": {
+        "idmt-dataset1-fender-strat-clean-neck-sc": 0.9871794871794872,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 0.9743589743589743,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 0.9871794871794872,
+        "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 0.9743589743589743
+      },
+      "by_string": {
+        "1": 1.0,
+        "2": 0.9807692307692307,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 0.9807692307692307,
+        "6": 0.9230769230769231
+      },
+      "prior": {
+        "accuracy": 0.9807692307692307,
+        "fired": 0,
+        "false_accept_rate": 0.28104575163398693
+      }
+    },
+    "pyin-whole": {
+      "overrides": {
+        "pyin_fmax": 1400
+      },
+      "exportable": false,
+      "total": 312,
+      "accuracy": 0.9519230769230769,
+      "counts": {
+        "correct": 297,
+        "octave": 2,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 13,
+        "missed": 0
+      },
+      "octave_rate": 0.00641025641025641,
+      "latency_p50_ms": null,
+      "latency_p95_ms": null,
+      "octave_fixes": 0,
+      "extra_events": 0,
+      "by_mic": {
+        "idmt-dataset1-fender-strat-clean-neck-sc": 0.9615384615384616,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 0.9487179487179487,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 0.9487179487179487,
+        "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 0.9487179487179487
+      },
+      "by_string": {
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 0.9615384615384616,
+        "6": 0.75
+      },
+      "prior": {
+        "accuracy": 0.9519230769230769,
+        "fired": 0,
+        "false_accept_rate": 0.0
+      }
+    },
+    "pyin-whole-fmax1000": {
+      "overrides": {
+        "pyin_fmax": 1000
+      },
+      "exportable": false,
+      "total": 312,
+      "accuracy": 0.9519230769230769,
+      "counts": {
+        "correct": 297,
+        "octave": 2,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 13,
+        "missed": 0
+      },
+      "octave_rate": 0.00641025641025641,
+      "latency_p50_ms": null,
+      "latency_p95_ms": null,
+      "octave_fixes": 0,
+      "extra_events": 0,
+      "by_mic": {
+        "idmt-dataset1-fender-strat-clean-neck-sc": 0.9615384615384616,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-hu": 0.9487179487179487,
+        "idmt-dataset1-ibanez-power-strat-clean-bridge-neck-sc": 0.9487179487179487,
+        "idmt-dataset1-ibanez-power-strat-clean-neck-hu": 0.9487179487179487
+      },
+      "by_string": {
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 0.9615384615384616,
+        "6": 0.75
+      },
+      "prior": {
+        "accuracy": 0.9519230769230769,
+        "fired": 0,
+        "false_accept_rate": 0.0
+      }
+    }
+  },
+  "best": "median30-150",
+  "best_exportable": "delay30"
+}

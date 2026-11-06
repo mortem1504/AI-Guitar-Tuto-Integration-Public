@@ -1,0 +1,19 @@
+node_modules
+dist
+.DS_Store
+.vercel
+
+# Technical notes that stay local.
+README.privado.md
+
+# Se copia desde node_modules cada vez que arranca el proyecto.
+public/mediapipe
+
+# Lo escribe `vercel link`: token OIDC del proyecto.
+.env*
+
+# Local agent tooling
+.claude-flow/
+
+# Recorded videos for ?debug&video= (app/videoRun.ts). Never committed, never built.
+local-videos/

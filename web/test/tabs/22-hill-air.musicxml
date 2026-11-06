@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+<!-- Hill Air: an original 6/8 tune written for the tab-check fixtures. -->
+<score-partwise version="4.0">
+  <work><work-title>Hill Air</work-title></work>
+  <identification><creator type="composer">Test Riffs (original)</creator></identification>
+  <part-list>
+    <score-part id="P1">
+      <part-name>Guitar</part-name>
+      <midi-instrument id="P1-I1"><midi-program>26</midi-program></midi-instrument>
+    </score-part>
+  </part-list>
+  <part id="P1">
+    <measure number="1">
+      <barline location="left"><repeat direction="forward"/></barline>
+      <attributes>
+        <divisions>2</divisions>
+        <key><fifths>0</fifths></key>
+        <time><beats>6</beats><beat-type>8</beat-type></time>
+        <clef><sign>TAB</sign><line>5</line></clef>
+        <staff-details>
+          <staff-lines>6</staff-lines>
+          <staff-tuning line="1"><tuning-step>E</tuning-step><tuning-octave>2</tuning-octave></staff-tuning>
+          <staff-tuning line="2"><tuning-step>A</tuning-step><tuning-octave>2</tuning-octave></staff-tuning>
+          <staff-tuning line="3"><tuning-step>D</tuning-step><tuning-octave>3</tuning-octave></staff-tuning>
+          <staff-tuning line="4"><tuning-step>G</tuning-step><tuning-octave>3</tuning-octave></staff-tuning>
+          <staff-tuning line="5"><tuning-step>B</tuning-step><tuning-octave>3</tuning-octave></staff-tuning>
+          <staff-tuning line="6"><tuning-step>E</tuning-step><tuning-octave>4</tuning-octave></staff-tuning>
+        </staff-details>
+      </attributes>
+      <direction placement="above">
+        <direction-type><rehearsal>A</rehearsal></direction-type>
+        <sound tempo="100"/>
+      </direction>
+      <note>
+        <pitch><step>A</step><octave>3</octave></pitch>
+        <duration>1</duration><type>eighth</type>
+        <notations><technical><string>3</string><fret>2</fret></technical></notations>
+      </note>
+      <note>
+        <pitch><step>B</step><octave>3</octave></pitch>
+        <duration>1</duration><type>eighth</type>
+        <notations><technical><hammer-on number="1" type="start">H</hammer-on><string>2</string><fret>0</fret></technical></notations>
+      </note>
+      <note>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>1</duration><type>eighth</type>
+        <notations><technical><hammer-on number="1" type="stop"/><string>2</string><fret>1</fret></technical></notations>
+      </note>
+      <note>
+        <pitch><step>D</step><octave>4</octave></pitch>
+        <duration>3</duration><tie type="start"/><type>quarter</type><dot/>
+        <notations><tied type="start"/><technical><string>2</string><fret>3</fret></technical></notations>
+      </note>
+    </measure>
+    <measure number="2">
+      <note>
+        <pitch><step>D</step><octave>4</octave></pitch>
+        <duration>3</duration><tie type="stop"/><type>quarter</type><dot/>
+        <notations><tied type="stop"/><technical><string>2</string><fret>3</fret></technical></notations>
+      </note>
+      <note>
+        <pitch><step>E</step><octave>4</octave></pitch>
+        <duration>3</duration><type>quarter</type><dot/>
+        <notations><technical><string>1</string><fret>0</fret></technical></notations>
+      </note>
+      <note>
+        <chord/>
+        <pitch><step>C</step><octave>4</octave></pitch>
+        <duration>3</duration><type>quarter</type><dot/>
+        <notations><technical><string>2</string><fret>1</fret></technical></notations>
+      </note>
+      <note>
+        <chord/>
+        <pitch><step>G</step><octave>3</octave></pitch>
+        <duration>3</duration><type>quarter</type><dot/>
+        <notations><technical><string>3</string><fret>0</fret></technical></notations>
+      </note>
+      <barline location="right"><repeat direction="backward" times="2"/></barline>
+    </measure>
+    <measure number="3">
+      <note>
+        <pitch><step>G</step><octave>3</octave></pitch>
+        <duration>2</duration><type>quarter</type>
+        <notations><technical><string>3</string><fret>0</fret></technical></notations>
+      </note>
+      <note>
+        <pitch><step>A</step><octave>3</octave></pitch>
+        <duration>1</duration><type>eighth</type>
+        <notations><technical><string>3</string><fret>2</fret></technical></notations>
+      </note>
+      <note>
+        <pitch><step>E</step><octave>3</octave></pitch>
+        <duration>3</duration><type>quarter</type><dot/>
+        <notations><technical><string>4</string><fret>2</fret></technical></notations>
+      </note>
+      <barline location="right"><bar-style>light-heavy</bar-style></barline>
+    </measure>
+  </part>
+</score-partwise>

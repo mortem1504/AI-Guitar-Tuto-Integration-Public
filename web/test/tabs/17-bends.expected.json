@@ -1,0 +1,19 @@
+{
+  "title": "Bend Drill (original)",
+  "tuning": ["E2", "A2", "D3", "G3", "B3", "E4"],
+  "capo": 0,
+  "tempo": null,
+  "events": [
+    "2:7[bend+2]",
+    "2:7[bend+2]",
+    "2:8[bend+2]",
+    "2:10[bend+2,release]",
+    "2:12[bend+2,release,vibrato]",
+    "3:7[bend+1]"
+  ],
+  "midi": ["66", "66", "67", "69", "71", "62"],
+  "spacing": [null, 5, 7, 4, 10, 4],
+  "labels": [],
+  "repeats": [],
+  "warnings": ["bend on fret 8 has no target"]
+}

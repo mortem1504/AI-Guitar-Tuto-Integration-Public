@@ -1,0 +1,21 @@
+# docker compose up web          -> the production build on http://localhost:8088 (WEB_PORT=… to change)
+# docker compose --profile dev up dev -> Vite with hot reload on http://localhost:3004
+services:
+  web:
+    build: .
+    ports:
+      - "${WEB_PORT:-8088}:80"
+    restart: unless-stopped
+
+  dev:
+    profiles: ["dev"]
+    image: node:24-alpine
+    working_dir: /app
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0"
+    ports:
+      - "3004:3004"
+    volumes:
+      - .:/app
+      # The container's own node_modules, so it never mixes with the host's
+      # (esbuild ships a different binary for each platform).
+      - /app/node_modules

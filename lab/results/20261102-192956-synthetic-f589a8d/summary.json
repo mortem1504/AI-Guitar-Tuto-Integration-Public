@@ -1,0 +1,499 @@
+{
+  "run_id": "20261102-192956-synthetic-f589a8d",
+  "created": "2026-11-02T19:29:56",
+  "dataset": "data/synthetic",
+  "clips": 468,
+  "mic_types": {
+    "synthetic-clean": 156,
+    "synthetic-noisy": 156,
+    "synthetic-trap": 156
+  },
+  "synthetic": true,
+  "params": {
+    "frameSize": 1024,
+    "hopSize": 128,
+    "fluxMaxHz": 6000,
+    "fluxLag": 2,
+    "fluxMaxFilter": 1,
+    "fluxHistory": 16,
+    "fluxRatio": 3,
+    "fluxMin": 22,
+    "refractoryMs": 60,
+    "minRms": 0.002,
+    "gateAboveFloor": 3,
+    "floorRiseDbPerSecond": 3,
+    "pitchDelayMs": 20,
+    "window": 2048,
+    "longWindow": 4096,
+    "extendBelowHz": 120,
+    "minHz": 75,
+    "maxHz": 1400,
+    "method": "mpm",
+    "mpmPeakRatio": 0.9,
+    "mpmMinClarity": 0.8,
+    "yinThreshold": 0.15,
+    "octaveCheck": false,
+    "octaveCheckRatio": 0.1,
+    "priorMaxConfidence": 0.97,
+    "levelIntervalMs": 50
+  },
+  "lab_run": null,
+  "variants": {
+    "web": {
+      "overrides": {},
+      "exportable": true,
+      "total": 468,
+      "accuracy": 0.6688034188034188,
+      "counts": {
+        "correct": 313,
+        "octave": 155,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 0,
+        "missed": 0
+      },
+      "octave_rate": 0.3311965811965812,
+      "latency_p50_ms": 62.66666666666665,
+      "latency_p95_ms": 105.33333333333333,
+      "octave_fixes": 0,
+      "extra_events": 0,
+      "by_mic": {
+        "synthetic-clean": 1.0,
+        "synthetic-noisy": 1.0,
+        "synthetic-trap": 0.00641025641025641
+      },
+      "by_string": {
+        "1": 0.6794871794871795,
+        "2": 0.6666666666666666,
+        "3": 0.6666666666666666,
+        "4": 0.6666666666666666,
+        "5": 0.6666666666666666,
+        "6": 0.6666666666666666
+      },
+      "prior": {
+        "accuracy": 1.0,
+        "fired": 155,
+        "false_accept_rate": 0.07028753993610223
+      }
+    },
+    "yin": {
+      "overrides": {
+        "method": "yin"
+      },
+      "exportable": true,
+      "total": 468,
+      "accuracy": 0.6666666666666666,
+      "counts": {
+        "correct": 312,
+        "octave": 156,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 0,
+        "missed": 0
+      },
+      "octave_rate": 0.3333333333333333,
+      "latency_p50_ms": 62.66666666666665,
+      "latency_p95_ms": 105.33333333333333,
+      "octave_fixes": 0,
+      "extra_events": 0,
+      "by_mic": {
+        "synthetic-clean": 1.0,
+        "synthetic-noisy": 1.0,
+        "synthetic-trap": 0.0
+      },
+      "by_string": {
+        "1": 0.6666666666666666,
+        "2": 0.6666666666666666,
+        "3": 0.6666666666666666,
+        "4": 0.6666666666666666,
+        "5": 0.6666666666666666,
+        "6": 0.6666666666666666
+      },
+      "prior": {
+        "accuracy": 1.0,
+        "fired": 156,
+        "false_accept_rate": 0.0673076923076923
+      }
+    },
+    "octave": {
+      "overrides": {
+        "octaveCheck": true
+      },
+      "exportable": true,
+      "total": 468,
+      "accuracy": 1.0,
+      "counts": {
+        "correct": 468,
+        "octave": 0,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 0,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 62.66666666666665,
+      "latency_p95_ms": 105.33333333333333,
+      "octave_fixes": 155,
+      "extra_events": 0,
+      "by_mic": {
+        "synthetic-clean": 1.0,
+        "synthetic-noisy": 1.0,
+        "synthetic-trap": 1.0
+      },
+      "by_string": {
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 1.0,
+        "6": 1.0
+      },
+      "prior": {
+        "accuracy": 1.0,
+        "fired": 0,
+        "false_accept_rate": 0.3782051282051282
+      }
+    },
+    "yin+octave": {
+      "overrides": {
+        "method": "yin",
+        "octaveCheck": true
+      },
+      "exportable": true,
+      "total": 468,
+      "accuracy": 1.0,
+      "counts": {
+        "correct": 468,
+        "octave": 0,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 0,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 62.66666666666665,
+      "latency_p95_ms": 105.33333333333333,
+      "octave_fixes": 156,
+      "extra_events": 0,
+      "by_mic": {
+        "synthetic-clean": 1.0,
+        "synthetic-noisy": 1.0,
+        "synthetic-trap": 1.0
+      },
+      "by_string": {
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 1.0,
+        "6": 1.0
+      },
+      "prior": {
+        "accuracy": 1.0,
+        "fired": 0,
+        "false_accept_rate": 0.3782051282051282
+      }
+    },
+    "delay30": {
+      "overrides": {
+        "pitchDelayMs": 30
+      },
+      "exportable": true,
+      "total": 468,
+      "accuracy": 0.6688034188034188,
+      "counts": {
+        "correct": 313,
+        "octave": 155,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 0,
+        "missed": 0
+      },
+      "octave_rate": 0.3311965811965812,
+      "latency_p50_ms": 72.66666666666666,
+      "latency_p95_ms": 115.33333333333334,
+      "octave_fixes": 0,
+      "extra_events": 0,
+      "by_mic": {
+        "synthetic-clean": 1.0,
+        "synthetic-noisy": 1.0,
+        "synthetic-trap": 0.00641025641025641
+      },
+      "by_string": {
+        "1": 0.6794871794871795,
+        "2": 0.6666666666666666,
+        "3": 0.6666666666666666,
+        "4": 0.6666666666666666,
+        "5": 0.6666666666666666,
+        "6": 0.6666666666666666
+      },
+      "prior": {
+        "accuracy": 1.0,
+        "fired": 155,
+        "false_accept_rate": 0.04792332268370607
+      }
+    },
+    "delay30+octave": {
+      "overrides": {
+        "pitchDelayMs": 30,
+        "octaveCheck": true
+      },
+      "exportable": true,
+      "total": 468,
+      "accuracy": 1.0,
+      "counts": {
+        "correct": 468,
+        "octave": 0,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 0,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 72.66666666666666,
+      "latency_p95_ms": 115.33333333333334,
+      "octave_fixes": 155,
+      "extra_events": 0,
+      "by_mic": {
+        "synthetic-clean": 1.0,
+        "synthetic-noisy": 1.0,
+        "synthetic-trap": 1.0
+      },
+      "by_string": {
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 1.0,
+        "6": 1.0
+      },
+      "prior": {
+        "accuracy": 1.0,
+        "fired": 0,
+        "false_accept_rate": 0.36324786324786323
+      }
+    },
+    "median30-150": {
+      "overrides": {
+        "lab_median_from_ms": 30,
+        "lab_median_to_ms": 150
+      },
+      "exportable": false,
+      "total": 468,
+      "accuracy": 0.6688034188034188,
+      "counts": {
+        "correct": 313,
+        "octave": 155,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 0,
+        "missed": 0
+      },
+      "octave_rate": 0.3311965811965812,
+      "latency_p50_ms": 149.99999999999997,
+      "latency_p95_ms": 150.00000000000003,
+      "octave_fixes": 0,
+      "extra_events": 0,
+      "by_mic": {
+        "synthetic-clean": 1.0,
+        "synthetic-noisy": 1.0,
+        "synthetic-trap": 0.00641025641025641
+      },
+      "by_string": {
+        "1": 0.6794871794871795,
+        "2": 0.6666666666666666,
+        "3": 0.6666666666666666,
+        "4": 0.6666666666666666,
+        "5": 0.6666666666666666,
+        "6": 0.6666666666666666
+      },
+      "prior": {
+        "accuracy": 1.0,
+        "fired": 155,
+        "false_accept_rate": 0.012779552715654952
+      }
+    },
+    "median30-150+octave": {
+      "overrides": {
+        "lab_median_from_ms": 30,
+        "lab_median_to_ms": 150,
+        "octaveCheck": true
+      },
+      "exportable": false,
+      "total": 468,
+      "accuracy": 0.9935897435897436,
+      "counts": {
+        "correct": 465,
+        "octave": 0,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 3,
+        "unpitched": 0,
+        "missed": 0
+      },
+      "octave_rate": 0.0,
+      "latency_p50_ms": 149.99999999999997,
+      "latency_p95_ms": 150.00000000000003,
+      "octave_fixes": 0,
+      "extra_events": 0,
+      "by_mic": {
+        "synthetic-clean": 1.0,
+        "synthetic-noisy": 1.0,
+        "synthetic-trap": 0.9807692307692307
+      },
+      "by_string": {
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 1.0,
+        "6": 0.9615384615384616
+      },
+      "prior": {
+        "accuracy": 0.9935897435897436,
+        "fired": 0,
+        "false_accept_rate": 0.33548387096774196
+      }
+    },
+    "range75-1000": {
+      "overrides": {
+        "maxHz": 1000
+      },
+      "exportable": true,
+      "total": 468,
+      "accuracy": 0.6965811965811965,
+      "counts": {
+        "correct": 326,
+        "octave": 142,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 0,
+        "missed": 0
+      },
+      "octave_rate": 0.3034188034188034,
+      "latency_p50_ms": 62.66666666666665,
+      "latency_p95_ms": 105.33333333333333,
+      "octave_fixes": 0,
+      "extra_events": 0,
+      "by_mic": {
+        "synthetic-clean": 1.0,
+        "synthetic-noisy": 1.0,
+        "synthetic-trap": 0.08974358974358974
+      },
+      "by_string": {
+        "1": 0.8205128205128205,
+        "2": 0.6923076923076923,
+        "3": 0.6666666666666666,
+        "4": 0.6666666666666666,
+        "5": 0.6666666666666666,
+        "6": 0.6666666666666666
+      },
+      "prior": {
+        "accuracy": 1.0,
+        "fired": 142,
+        "false_accept_rate": 0.07668711656441718
+      }
+    },
+    "flux18": {
+      "overrides": {
+        "fluxMin": 18
+      },
+      "exportable": true,
+      "total": 468,
+      "accuracy": 0.6688034188034188,
+      "counts": {
+        "correct": 313,
+        "octave": 155,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 0,
+        "missed": 0
+      },
+      "octave_rate": 0.3311965811965812,
+      "latency_p50_ms": 62.66666666666665,
+      "latency_p95_ms": 105.33333333333333,
+      "octave_fixes": 0,
+      "extra_events": 0,
+      "by_mic": {
+        "synthetic-clean": 1.0,
+        "synthetic-noisy": 1.0,
+        "synthetic-trap": 0.00641025641025641
+      },
+      "by_string": {
+        "1": 0.6794871794871795,
+        "2": 0.6666666666666666,
+        "3": 0.6666666666666666,
+        "4": 0.6666666666666666,
+        "5": 0.6666666666666666,
+        "6": 0.6666666666666666
+      },
+      "prior": {
+        "accuracy": 1.0,
+        "fired": 155,
+        "false_accept_rate": 0.0670926517571885
+      }
+    },
+    "flux26": {
+      "overrides": {
+        "fluxMin": 26
+      },
+      "exportable": true,
+      "total": 468,
+      "accuracy": 0.6688034188034188,
+      "counts": {
+        "correct": 313,
+        "octave": 155,
+        "harmonic": 0,
+        "fifth": 0,
+        "semitone": 0,
+        "other": 0,
+        "unpitched": 0,
+        "missed": 0
+      },
+      "octave_rate": 0.3311965811965812,
+      "latency_p50_ms": 62.66666666666665,
+      "latency_p95_ms": 105.33333333333333,
+      "octave_fixes": 0,
+      "extra_events": 0,
+      "by_mic": {
+        "synthetic-clean": 1.0,
+        "synthetic-noisy": 1.0,
+        "synthetic-trap": 0.00641025641025641
+      },
+      "by_string": {
+        "1": 0.6794871794871795,
+        "2": 0.6666666666666666,
+        "3": 0.6666666666666666,
+        "4": 0.6666666666666666,
+        "5": 0.6666666666666666,
+        "6": 0.6666666666666666
+      },
+      "prior": {
+        "accuracy": 1.0,
+        "fired": 155,
+        "false_accept_rate": 0.07028753993610223
+      }
+    }
+  },
+  "best": "octave",
+  "best_exportable": "octave"
+}

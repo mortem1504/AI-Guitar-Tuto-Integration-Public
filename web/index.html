@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>AI Guitar Coach</title>
+    <meta
+      name="description"
+      content="Learn guitar in front of your camera. It finds your fretboard and your hand and tells you which finger goes where. Everything runs in the browser."
+    />
+    <meta name="color-scheme" content="dark" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230d0f14'/><g stroke='%23e0a03c' stroke-width='5' stroke-linecap='round'><path d='M26 20v60M50 20v60M74 20v60'/></g><g stroke='%23f4f1ea' stroke-width='7' stroke-linecap='round'><path d='M16 38h68M16 62h68'/></g></svg>"
+    />
+  </head>
+  <body>
+    <main id="stage">
+      <!-- The camera. Deliberately not mirrored: the fretboard has to read the
+           way it really is, or every fret number comes out backwards. -->
+      <video id="video" playsinline muted></video>
+      <!-- Everything drawn on top: the fretboard grid, the targets, the hand. -->
+      <canvas id="canvas"></canvas>
+
+      <header id="brand">
+        <h1>AI Guitar Coach</h1>
+        <p id="status"></p>
+      </header>
+
+      <nav id="tools">
+        <button id="home-toggle" class="gone" type="button"></button>
+        <button id="lesson-toggle" type="button"></button>
+        <button id="notes-toggle" type="button"></button>
+        <button id="listen-toggle" type="button"></button>
+        <button id="tuner-toggle" type="button"></button>
+        <button id="song-toggle" type="button"></button>
+        <button id="calibrate-toggle" type="button"></button>
+        <button id="setup-toggle" type="button"></button>
+        <button id="help-toggle" type="button"></button>
+        <button id="panel-toggle" type="button"></button>
+      </nav>
+
+      <!-- The chord being taught right now, with its diagram and its notes. -->
+      <div id="coach" class="gone"></div>
+
+      <!-- Settings. -->
+      <aside id="panel" class="gone"></aside>
+
+      <!-- The lesson list. -->
+      <div id="lessons" class="gone">
+        <div id="lessons-card" class="card"></div>
+      </div>
+
+      <!-- Paste a chord chart to practise a song. -->
+      <div id="song" class="gone">
+        <div id="song-card" class="card"></div>
+      </div>
+
+      <!-- The tuner: the only part of the app that listens. -->
+      <div id="tuner" class="gone">
+        <div id="tuner-card" class="card"></div>
+      </div>
+
+      <!-- Marking the neck. -->
+      <div id="calibrate" class="gone">
+        <div id="calibrate-card" class="card"></div>
+      </div>
+
+      <div id="help" class="gone">
+        <div id="help-card" class="card"></div>
+      </div>
+
+      <div id="start">
+        <div id="start-card" class="card"></div>
+      </div>
+
+      <!-- What the microphone hears, note by note. After #start so that
+           "just listen" can open it on top of the start card. -->
+      <div id="listen" class="gone">
+        <div id="listen-card" class="card"></div>
+      </div>
+
+      <!-- Single-note exercises, judged by ear. No camera, so it too sits
+           above the start card. -->
+      <div id="notes" class="gone">
+        <div id="notes-card" class="card"></div>
+      </div>
+
+      <!-- Checking the setup: input, level, noise, a note, the camera. Opened
+           from the start card too, so it sits above it. -->
+      <div id="setup" class="gone">
+        <div id="setup-card" class="card"></div>
+      </div>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "title": "Legato Study (original)",
+  "tuning": ["E2", "A2", "D3", "G3", "B3", "E4"],
+  "capo": 0,
+  "tempo": null,
+  "events": [
+    "3:5",
+    "3:7[hammer]",
+    "3:5[pull]",
+    "4:7",
+    "3:7",
+    "3:9[slideUp]",
+    "3:9",
+    "3:7[slideDown]",
+    "4:7[vibrato]",
+    "3:5",
+    "3:7[slideUp]",
+    "3:7",
+    "3:5[slideDown]"
+  ],
+  "midi": ["60", "62", "60", "57", "62", "64", "64", "62", "57", "60", "62", "62", "60"],
+  "spacing": [null, 2, 2, 3, 3, 2, 3, 2, 3, 3, 2, 3, 2],
+  "labels": [],
+  "repeats": [],
+  "warnings": []
+}

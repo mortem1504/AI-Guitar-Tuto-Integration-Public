@@ -1,0 +1,40 @@
+# Python virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment/secrets
+.env
+*.env
+
+# AI model weights
+*.pt
+*.pth
+*.onnx
+
+# Audio. Recordings are too large for git (~22 MB per microphone): the WAVs go
+# on the team's shared drive and only labels.csv is committed (README, section 7).
+# The synthetic set is regenerable.
+data/*.wav
+data/**/*.wav
+data/synthetic/
+# Third-party datasets (licences forbid redistributing them): downloaded locally only.
+data/external/
+
+# Evaluation runs: summaries are kept, per-clip tables are regenerable.
+results/*/per_clip.csv
+# Points at the last run on this machine (absolute paths); audio-check reads it.
+results/latest.json
+# Local agent tooling
+.claude-flow/

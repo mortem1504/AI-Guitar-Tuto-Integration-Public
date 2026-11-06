@@ -1,0 +1,11 @@
+node_modules
+dist
+local-videos/
+.env*
+public/mediapipe
+.vite
+.vercel
+.claude
+.claude-flow
+.DS_Store
+README.privado.md

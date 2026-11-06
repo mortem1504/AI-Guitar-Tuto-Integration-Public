@@ -1,0 +1,12 @@
+{
+  "title": "High Climb (original)",
+  "tuning": ["E2", "A2", "D3", "G3", "B3", "E4"],
+  "capo": 0,
+  "tempo": null,
+  "events": ["1:10", "1:12", "1:15", "1:12", "1:10", "2:13"],
+  "midi": ["74", "76", "79", "76", "74", "72"],
+  "spacing": [null, 4, 4, 4, 4, 4],
+  "labels": [],
+  "repeats": [],
+  "warnings": []
+}

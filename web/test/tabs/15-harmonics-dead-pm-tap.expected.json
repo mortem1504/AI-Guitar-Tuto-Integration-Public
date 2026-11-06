@@ -1,0 +1,23 @@
+{
+  "title": "Bells and Chugs (original)",
+  "tuning": ["E2", "A2", "D3", "G3", "B3", "E4"],
+  "capo": 0,
+  "tempo": null,
+  "events": [
+    "1:12[harmonic] 2:12[harmonic]",
+    "3:7[harmonic]",
+    "4:5[harmonic]",
+    "6:0[palmMute]",
+    "6:0[palmMute]",
+    "6:0[dead]",
+    "6:0[dead]",
+    "1:12[tap]",
+    "1:5[pull]",
+    "1:8[hammer]"
+  ],
+  "midi": ["76 71", "74", "74", "40", "40", "40", "40", "76", "69", "72"],
+  "spacing": [null, 5, 4, 5, 3, 3, 2, null, 3, 2],
+  "labels": [],
+  "repeats": [],
+  "warnings": []
+}

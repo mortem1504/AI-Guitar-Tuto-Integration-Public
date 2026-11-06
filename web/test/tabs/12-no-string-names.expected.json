@@ -1,0 +1,12 @@
+{
+  "title": "Little Waltz (original)",
+  "tuning": ["E2", "A2", "D3", "G3", "B3", "E4"],
+  "capo": 0,
+  "tempo": null,
+  "events": ["5:0", "3:2", "2:1", "1:0 3:2", "2:1"],
+  "midi": ["45", "57", "60", "64 57", "60"],
+  "spacing": [null, 2, 4, 4, 4],
+  "labels": [],
+  "repeats": [],
+  "warnings": ["No tuning written"]
+}
