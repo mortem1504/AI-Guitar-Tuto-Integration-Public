@@ -270,7 +270,6 @@ environment variables or secrets.
 - [BITACORA.md](BITACORA.md): why each decision was made, including the measurements that killed ideas that looked good on paper.
 - [ROADMAP.md](ROADMAP.md): where it is going.
 - [SECURITY.md](SECURITY.md): exactly what the code touches in your browser.
-- [CLAUDE.md](CLAUDE.md): guidance for working on the code with Claude Code.
 
 ## License
 

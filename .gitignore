@@ -1,6 +1,3 @@
-# Local agent tooling
-.claude-flow/
-
 # OS files
 .DS_Store
 Thumbs.db

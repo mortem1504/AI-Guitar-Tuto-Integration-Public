@@ -8,8 +8,8 @@ lee del código; lo que está acá es el *por qué*.
 ## 2026-09-08 — F0: el punto de partida
 
 **Qué se hizo.** Se dejó el repo en `DecoudJuan/Guitar-Learning`, todo
-consolidado en `main`, y se escribieron `ROADMAP.md`, `BITACORA.md` y
-`CLAUDE.md` antes de tocar código.
+consolidado en `main`, y se escribieron `ROADMAP.md` y `BITACORA.md` antes de
+tocar código.
 
 **Decisión: el stack de visión antes que la interfaz.** Lo caro de escribir es
 lo que está debajo: el pipeline de MediaPipe con filtro One Euro, la histéresis
@@ -134,8 +134,8 @@ practicar después; nunca quiso negarle un Do a alguien que quiere probarlo.
 
 **Qué se hizo.** CSP ajustada (sin micrófono, sin MIDI: se apagan en la
 `Permissions-Policy` en vez de quedar simplemente sin usar), `base` de Vite de
-vuelta a `/` para Vercel, y README, SECURITY y CLAUDE reescritos alrededor de lo
-que la app es ahora.
+vuelta a `/` para Vercel, y README y SECURITY reescritos alrededor de lo que la
+app es ahora.
 
 **Decisión: SECURITY.md se reescribe entero en vez de recortarse.** El documento
 original prometía cosas sobre grabaciones, micrófono y MIDI que ya no existen.
@@ -478,9 +478,9 @@ goal is a verdict on single notes within 200 ms, which only the sound can give:
 the camera cannot tell a fretted note from a ringing one, or a sharp one from an
 in-tune one. The terms that made the tuner acceptable carry over unchanged. The
 microphone is processed in the browser, never recorded or uploaded, never routed
-to the speakers, and released when nothing needs it. CLAUDE.md and SECURITY.md
-will be rewritten in the same commit that opens the microphone for practice
-(Phase 1), as they were for F11.
+to the speakers, and released when nothing needs it. SECURITY.md will be
+rewritten in the same commit that opens the microphone for practice (Phase 1),
+as it was for F11.
 
 **Decision: no YOLO.** The team's original plan trained a detector for the
 fretboard. The four-click homography plus `NeckTracker` already does that job
@@ -734,14 +734,14 @@ The numbers, with how each was measured, are in `../docs/evaluation.md`; the
 tester protocol in `../docs/tester-survey.md`. What was decided on the way:
 
 **Camera errors say which problem it is.** "Cannot detect my camera" turned
-out to be the Claude desktop browser pane, which never grants a camera. A
+out to be an embedded desktop browser pane, which never grants a camera. A
 single "could not start the camera" message told the user nothing, so
 `vision/cameraError.ts` maps the browser's error names to five cases (blocked,
 missing, busy, insecure page, the hand model failed to load), each with what
 to do (`home-check` covers the mapping).
 
 **The neck is marked by hand, and the calibrator says so.** The neck detector
-finds nothing on real webcams (see Neck tracking in CLAUDE.md), yet "Find it
+finds nothing on real webcams, yet "Find it
 for me" was offered first, and a user's first report was "it cannot detect
 my guitar fret". The button now shows only with the experimental `autoDetect`
 setting, and the intro says the neck is marked once, by hand, and followed
@@ -902,7 +902,7 @@ cut from the marked frame, so a neck turned 15-20° stopped matching; the
 search was 12 px around the last place at 10 Hz, so a quick move lost it; and
 a lost tracker kept the last grid on screen indefinitely.
 
-The rebuild, and why each piece (CLAUDE.md, "Neck tracking", has the list):
+The rebuild and why each piece was needed:
 anchors on the body as well; templates warped to the current view;
 half-size then full-size search at 15 Hz with the motion predicted; one shared
 shift from the summed correlation maps before any anchor picks its own peak;

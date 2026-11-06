@@ -2,8 +2,7 @@
 
 Guitar Learning is a static single-page app: no backend, no framework, one runtime
 dependency (`@mediapipe/tasks-vision`). This document is the short map; the
-reasoning behind each decision is in [BITACORA.md](../BITACORA.md) and the
-guardrails Claude Code follows are in [CLAUDE.md](../CLAUDE.md).
+reasoning behind each decision is in [BITACORA.md](../BITACORA.md).
 
 ## The frame loop
 

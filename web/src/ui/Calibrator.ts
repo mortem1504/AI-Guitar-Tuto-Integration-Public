@@ -71,7 +71,7 @@ export class Calibrator {
   private doneHandler: ((corners: Corners, farFret: number, cornersAt: CornerKind, nearFret: number) => void) | null = null;
   private closeHandler: (() => void) | null = null;
   private autoHandler: (() => void) | null = null;
-  /** "Find it for me" only with the experimental `autoDetect` on: the detector finds nothing on real webcams yet (CLAUDE.md). */
+  /** "Find it for me" only with the experimental `autoDetect` on: the detector finds nothing on real webcams yet. */
   private autoOffered = false;
 
   whenDone(handler: (corners: Corners, farFret: number, cornersAt: CornerKind, nearFret: number) => void) {

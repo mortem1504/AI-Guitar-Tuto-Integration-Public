@@ -24,8 +24,7 @@ sintetizado en ninguna parte.
 
 ### F0 — Corte y documentación ✅
 Desconectar el remoto viejo, apuntar a `DecoudJuan/Guitar-Learning`, renombrar
-la carpeta, y dejar `ROADMAP.md`, `BITACORA.md` y `CLAUDE.md` escritos antes de
-tocar código.
+la carpeta, y dejar `ROADMAP.md` y `BITACORA.md` escritos antes de tocar código.
 
 ### F1 — Demolición ✅
 Borrar `src/audio`, `src/midi`, el sintetizador y todo lo que dependía de él.

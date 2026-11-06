@@ -36,5 +36,3 @@ data/external/
 results/*/per_clip.csv
 # Points at the last run on this machine (absolute paths); audio-check reads it.
 results/latest.json
-# Local agent tooling
-.claude-flow/
